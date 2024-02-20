@@ -1,0 +1,33 @@
+{% extends "blogapp/base.html" %}
+
+{% block title_block %}
+    ASAD BLOG HOMEPAGE
+{% endblock title_block %}
+
+{% block body_block %}
+    <h1>Asad's Blog</h1>
+    
+    {% if tag %}
+        <h2>Posts tagged with '{{ tag.name }}'</h2>
+    {% endif %}
+        
+    {% for i in posttable_list  %}
+        <a href="{{ i.get_absolute_url }}"><h2>{{ i.title }} </h2></a>
+        <p id = "date">Published on {{ i.publish_blog }} by {{ i.author|title }}</p>
+
+        <p>Tags:
+            
+            {% for tag in i.tags.all %}
+                <a href=" {% url 'post_list_by_tag_name' tag.slug %}" class = "btn btn-success">{{ tag.name }}</a>
+            {% endfor %}
+                
+
+        </p>
+
+        {{ i.body_blog|truncatewords:30|linebreaks }}
+        
+    {% endfor %}
+    {% include "blogapp/pagination.html" with page=posttable_list %}
+    
+{% endblock body_block %}
+

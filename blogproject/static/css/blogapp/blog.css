@@ -1,0 +1,40 @@
+.contents{
+    width: 60%;
+    float: left;
+    padding: 10px 0 0 30px;
+    background: rgb(119, 207, 119);
+    height: 100%;
+}
+
+.sidebar{
+    width: 40%;
+    float: right;
+    padding: 10px;
+    background: pink;
+    height: 100%;
+    
+}
+
+h1{
+    text-align: center;
+    border: 1px solid black;
+    padding-bottom: 10px;
+}
+
+body{
+    color: black;
+    background: rgb(119, 207, 119);
+}
+
+#date{
+    color: black;
+    font-size: 15px;
+    font-style: italic;
+}
+
+#ch{
+    color: yellow;
+    font-size: 30px;
+    font-style: italic;
+    border-bottom: 2px solid yellow;
+}

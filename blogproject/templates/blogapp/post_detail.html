@@ -1,0 +1,43 @@
+{% extends "blogapp/base.html" %}
+
+{% block title_block %}
+        {{ post.title }}        
+{% endblock title_block %}
+
+{% block body_block %}
+        <h2>{{ post.title }} </h2>
+        <p id = "date">Published on {{ post.publish_blog }} by {{ post.author|title }}</p>
+        {{ post.body_blog|linebreaks }}
+        <!- this "post" is the key which is holding he value of all the fields coming from dictionary of post_detail_view() function->
+        <div class = "container" align="center">
+        <a href="/{{ post.id }}/share" class = "btn btn-lg btn-success"><input type="button" value="Share Post by Email"></a>
+        </div>
+        
+        {% with comments.count as comments_count %} <!- Aliasing concept of html ->
+            <h2> {{ comments_count }} Comment {{ comments_count|pluralize }}</h2>
+        {% endwith %}
+            
+        {% if comments %}
+            {% for i  in comments %}
+                <p id = "ch">Comment {{ forloop.counter }} by {{ i.name }} on {{ i.created }}</p> <!- forloop is builtin for just to get the comment count -> 
+                <div class = "cb">
+                    {{ i.body|linebreaks }}
+                </div>
+            {% endfor %}
+        {% else %}
+                <p>There are no comments yet!!!</p>            
+        {% endif %}
+
+        
+        {% if csubmit %}
+            <h2>Your comment added successfully</h2>
+        {% else %}
+            <form method = "POST">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input type = "submit", name="", value = "Submit Comment">
+            </form>
+        {% endif %}
+            
+        
+{% endblock body_block %}
